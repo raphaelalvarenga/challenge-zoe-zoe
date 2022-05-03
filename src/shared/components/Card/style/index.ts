@@ -14,6 +14,7 @@ export const Container = styled.div`
     border-radius: 5px;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
     padding: 14px 8px;
+    margin-bottom: 20px;
 `;
 
 export const AssetHeader = styled.div`
