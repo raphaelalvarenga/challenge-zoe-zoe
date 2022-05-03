@@ -17,7 +17,9 @@ const Card: FC<ICard> = ({ asset }) => {
                     {asset.market && <div>{asset.market}</div>}
                 </AssetType>
 
-                <AssetPrice status={asset.price > asset.previewPrice ? "bull" : "bear"}>{asset.price}</AssetPrice>
+                <AssetPrice status={asset.price > asset.previewPrice ? "bull" : "bear"}>
+                    {asset.price.toFixed(4)}
+                </AssetPrice>
 
                 <AssetArrows>
                     <ArrowUp isActive={asset.price > asset.previewPrice}>
