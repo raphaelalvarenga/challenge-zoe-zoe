@@ -38,7 +38,11 @@ const Assets = () => {
             </FiltersContainer>
 
             <CardsContainer>
-                <Card asset={assets} />
+                {
+                    assets
+                        .filter(asset => asset.assetName.includes(inputValue.toUpperCase()))
+                        .map(asset => (<Card key={asset.id} asset={asset} />))
+                }
             </CardsContainer>
         </Container>
     );
