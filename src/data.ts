@@ -1,16 +1,6 @@
 import { interval, from } from "rxjs";
 import { mergeMap, map, startWith } from "rxjs/operators";
-
-type AssetType = "Stock" | "Currency";
-
-interface Asset {
-    id: number;
-    assetName: string; // The asset name, like "AAPL" for Apple stock or "EUR" for Euro Currency
-    price: number; // asset current price (in USD)
-    lastUpdate: number; // timestamp
-    type: AssetType; // asset type Currency (e.g. USD, EUR...) or Stock (Samsung, Google)
-    market?: string; // for stock asset only
-}
+import { Asset, AssetType } from "./shared/interfaces/Asset.interface";
 
 function hashCode(s: string) {
     var text = "";
