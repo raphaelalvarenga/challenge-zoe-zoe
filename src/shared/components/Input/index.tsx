@@ -13,7 +13,12 @@ const Input: FC<IInput> = ({ inputValue: value, setInputValue }) => (
             <AiOutlineSearch />
         </IconContainer>
         <InputContainer>
-            <CustomInput type="text" value={value} onChange={(event: ChangeEvent<HTMLInputElement>) => setInputValue(event.target.value)} />
+            <CustomInput
+                type="text"
+                value={value}
+                onChange={(event: ChangeEvent<HTMLInputElement>) => setInputValue(event.target.value)}
+                placeholder="Filter..."
+            />
         </InputContainer>
     </Container>
 );
