@@ -4,9 +4,11 @@ import Card from "../../shared/components/Card";
 import { useEffect, useState } from "react";
 import dataStream from "../../data";
 import { IAssetUpdated } from "../../shared/interfaces/AssetUpdated.interface";
+import Select, { SingleValue } from 'react-select'
 
 const Assets = () => {
     const [inputValue, setInputValue] = useState("");
+    const [selectValue, setSelectValue] = useState<SingleValue<{value: string, label: string}>>({value: "all", label: "All"});
 
     const [assets, setAssets] = useState<IAssetUpdated>({
         id: 1,
@@ -22,27 +24,37 @@ const Assets = () => {
     useEffect(() => {
         // dataStream.subscribe(
         //     result => {
-        //         // if (assets.length === 0 || previewAssets.length === 0) {
-        //         setAssets({ ...result, previewPrice: result.price });
-        //         // setPreviewAssets(result);
-        //         // }
+        //         // assetsTest.push(result);
+        //         // setAssets(prev => [...prev, { ...result, previewPrice: result.price }]);
         //     },
         //     error => console.log(error)
         // );
     }, []);
 
+    useEffect(() => {
+        if (selectValue?.value === "all") {
+            setFilteredAssets(assets)
+            return;
+        }
+
+        setFilteredAssets(assets.filter(asset => asset.type === selectValue?.label));
+    }, [selectValue]);
+
     return (
         <Container>
             <FiltersContainer>
                 <Input inputValue={inputValue} setInputValue={setInputValue} />
+            <Select
+                value={selectValue}
+                name="assetType"
+                options={[{value: "all", label: "All"}, {value: "stock", label: "Stock"}, {value: "currency", label: "Currency"}]}
+                onChange = {(newValue: SingleValue<{value: string, label: string}>) => setSelectValue(newValue)}
+            />
             </FiltersContainer>
 
+
             <CardsContainer>
-                {
-                    assets
-                        .filter(asset => asset.assetName.includes(inputValue.toUpperCase()))
-                        .map(asset => (<Card key={asset.id} asset={asset} />))
-                }
+                {filteredAssets.filter(asset => asset.assetName.includes(inputValue.toUpperCase())).map(asset => <Card key={asset.id} asset={asset} />)}
             </CardsContainer>
         </Container>
     );
