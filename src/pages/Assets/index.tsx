@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import dataStream from "../../data";
 import { IAssetUpdated } from "../../shared/interfaces/AssetUpdated.interface";
 import Select, { SingleValue } from "react-select";
-import { concatAll, map, mergeAll, timer, toArray, zip } from "rxjs";
+
+let loadedAssets: IAssetUpdated[] = [];
 
 const Assets = () => {
     const [inputValue, setInputValue] = useState("");
@@ -16,10 +17,38 @@ const Assets = () => {
 
     const [assets, setAssets] = useState<IAssetUpdated[]>([]);
 
+    const [lastTimeFired, setLastTimeFired] = useState<number>(Date.now());
+
     const [filteredAssets, setFilteredAssets] = useState<IAssetUpdated[]>([]);
 
     useEffect(() => {
-        // dataStream.subscribe(res => assetsTest.push(res));
+        const subscription = dataStream.subscribe(
+            res => {
+                loadedAssets = [
+                    ...loadedAssets.filter(asset => asset.id !== res.id),
+                    { ...res, previewPrice: res.price },
+                ];
+
+                if (Date.now() - lastTimeFired >= 1000) {
+                    setAssets(loadedAssets);
+                    setFilteredAssets(loadedAssets);
+                    setLastTimeFired(Date.now());
+                }
+            },
+            error => console.log(error)
+        );
+
+        return () => {
+            subscription.unsubscribe();
+        };
+
+        // dataStream.subscribe(
+        //     res => {
+        //         assetsTest.push(res);
+        //         // setAssets()
+        //     },
+        //     error => console.log(error)
+        // );
         // zip(dataStream, timer(0, 1000))
         //     .pipe(map(([delayedInput, _timer]) => delayedInput))
         //     .subscribe(

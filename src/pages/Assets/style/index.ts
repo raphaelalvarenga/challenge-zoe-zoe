@@ -11,7 +11,7 @@ export const FiltersContainer = styled.div`
 `;
 
 export const CardsContainer = styled.div`
-display: grid;
-grid-template-columns: repeat(auto-fill, 400px);
-gap: 50px 80px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 400px);
+    gap: 50px 80px;
 `;
