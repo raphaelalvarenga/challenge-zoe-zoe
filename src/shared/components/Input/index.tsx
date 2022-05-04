@@ -16,7 +16,7 @@ const Input: FC<IInput> = ({ inputValue: value, setInputValue }) => (
             <CustomInput
                 type="text"
                 value={value}
-                onChange={(event: ChangeEvent<HTMLInputElement>) => setInputValue(event.target.value)}
+                onChange={(event: ChangeEvent<HTMLInputElement>) => setInputValue(event.target.value.trim())}
                 placeholder="Filter..."
             />
         </InputContainer>

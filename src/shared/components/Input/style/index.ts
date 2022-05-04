@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     border-bottom: 1px solid ${({ theme }) => theme.lightGrey};
-    height: 25px;
+    height: 38px;
     width: 180px;
     display: flex;
     align-items: center;
