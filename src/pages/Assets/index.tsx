@@ -22,8 +22,8 @@ const Assets = () => {
     const [filteredAssets, setFilteredAssets] = useState<IAssetUpdated[]>([]);
 
     useEffect(() => {
-        const subscription = dataStream.subscribe(
-            res => {
+        const subscription = dataStream.subscribe({
+            next: res => {
                 loadedAssets = [
                     ...loadedAssets.filter(asset => asset.id !== res.id),
                     { ...res, previewPrice: res.price },
@@ -35,8 +35,8 @@ const Assets = () => {
                     setLastTimeFired(Date.now());
                 }
             },
-            error => console.log(error)
-        );
+            error: e => console.log(e),
+        });
 
         return () => {
             subscription.unsubscribe();
