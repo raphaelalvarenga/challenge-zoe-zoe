@@ -6,12 +6,13 @@ import dataStream from "../../data";
 import { IAssetUpdated } from "../../shared/interfaces/AssetUpdated.interface";
 import Select, { SingleValue } from "react-select";
 import store from "../../shared/classes/Store.class";
+import { ISelectValue } from "../../shared/interfaces/SelectValue.interface";
 
 let loadedAssets: IAssetUpdated[] = [];
 
 const Assets = () => {
     const [inputValue, setInputValue] = useState("");
-    const [selectValue, setSelectValue] = useState<SingleValue<{ value: string; label: string }>>({
+    const [selectValue, setSelectValue] = useState<SingleValue<ISelectValue>>({
         value: "all",
         label: "All",
     });
@@ -21,11 +22,7 @@ const Assets = () => {
     const [lastTimeFired, setLastTimeFired] = useState<number>(Date.now());
 
     useEffect(() => {
-        store.initInputValue(setInputValue);
-
-        if (!localStorage.getItem("@zoe-zoe-financial-market:selectValue")) {
-            localStorage.setItem("@zoe-zoe-financial-market:selectValue", "all");
-        }
+        store.init(setInputValue, setSelectValue);
 
         const subscription = dataStream.subscribe({
             next: res => {
