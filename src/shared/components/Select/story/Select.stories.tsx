@@ -10,7 +10,7 @@ export default {
     component: Select,
 } as ComponentMeta<typeof Select>;
 
-export const Primary: ComponentStory<typeof Select> = () => {
+const Template: ComponentStory<typeof Select> = args => {
     const [selectValue, setSelectValue] = useState<SingleValue<ISelectValue>>({
         value: "all",
         label: "All",
@@ -18,7 +18,18 @@ export const Primary: ComponentStory<typeof Select> = () => {
 
     return (
         <GlobalStyles>
-            <Select selectValue={selectValue} setSelectValue={setSelectValue} />
+            <Select {...args} />
         </GlobalStyles>
     );
+};
+
+export const Primary = Template.bind({});
+
+Primary.args = {
+    selectValue: {
+        value: "all",
+        label: "All",
+    },
+
+    setSelectValue: () => {},
 };
