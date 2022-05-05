@@ -19,8 +19,6 @@ const Assets = () => {
 
     const [lastTimeFired, setLastTimeFired] = useState<number>(Date.now());
 
-    const [filteredAssets, setFilteredAssets] = useState<IAssetUpdated[]>([]);
-
     useEffect(() => {
         const subscription = dataStream.subscribe({
             next: res => {
@@ -34,7 +32,6 @@ const Assets = () => {
 
                 if (Date.now() - lastTimeFired >= 1000) {
                     setAssets(loadedAssets);
-                    setFilteredAssets(loadedAssets);
                     setLastTimeFired(Date.now());
                 }
             },
@@ -44,40 +41,18 @@ const Assets = () => {
         return () => {
             subscription.unsubscribe();
         };
-
-        // dataStream.subscribe(
-        //     res => {
-        //         assetsTest.push(res);
-        //         // setAssets()
-        //     },
-        //     error => console.log(error)
-        // );
-        // zip(dataStream, timer(0, 1000))
-        //     .pipe(map(([delayedInput, _timer]) => delayedInput))
-        //     .subscribe(
-        //         result => {
-        //             setAssets([...assets, { ...result, previewPrice: result.price }]);
-        //         },
-        //         error => console.log(error)
-        //     );
-        // dataStream.pipe(toArray()).subscribe(
-        //     result => {
-        //         console.log("teste");
-        //         console.log(result);
-        //         // setAssets(prev => [...prev, { ...result, previewPrice: result.price }]);
-        //     },
-        //     error => console.log(error)
-        // );
     }, []);
 
-    useEffect(() => {
-        if (selectValue?.value === "all") {
-            setFilteredAssets(assets);
-            return;
-        }
+    const filterAssets = () => {
+        let filteredAssets: IAssetUpdated[] = [];
 
-        setFilteredAssets(assets.filter(asset => asset.type === selectValue?.label));
-    }, [selectValue]);
+        filteredAssets =
+            selectValue?.value === "all" ? assets : assets.filter(asset => asset.type === selectValue?.label);
+
+        filteredAssets = filteredAssets.filter(asset => asset.assetName.includes(inputValue.toUpperCase()));
+
+        return filteredAssets;
+    };
 
     return (
         <Container>
@@ -96,11 +71,9 @@ const Assets = () => {
             </FiltersContainer>
 
             <CardsContainer>
-                {filteredAssets
-                    .filter(asset => asset.assetName.includes(inputValue.toUpperCase()))
-                    .map(asset => (
-                        <Card key={asset.id} asset={asset} />
-                    ))}
+                {filterAssets().map(asset => (
+                    <Card key={asset.id} asset={asset} />
+                ))}
             </CardsContainer>
         </Container>
     );
