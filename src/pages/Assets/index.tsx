@@ -58,6 +58,11 @@ const Assets = () => {
         return filteredAssets;
     };
 
+    const handleSelect = (newValue: SingleValue<{ value: string; label: string }>) => {
+        store.setSelectValue(newValue);
+        setSelectValue(newValue);
+    };
+
     return (
         <Container>
             <FiltersContainer>
@@ -70,7 +75,7 @@ const Assets = () => {
                         { value: "stock", label: "Stock" },
                         { value: "currency", label: "Currency" },
                     ]}
-                    onChange={(newValue: SingleValue<{ value: string; label: string }>) => setSelectValue(newValue)}
+                    onChange={handleSelect}
                 />
             </FiltersContainer>
 

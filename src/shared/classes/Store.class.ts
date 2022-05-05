@@ -30,6 +30,10 @@ class Store {
         localStorage.setItem(this._inputValue, value.trim());
     }
 
+    setSelectValue(option: SingleValue<ISelectValue>) {
+        localStorage.setItem(this._selectValue, JSON.stringify(option));
+    }
+
     get inputValue() {
         return this._inputValue;
     }
