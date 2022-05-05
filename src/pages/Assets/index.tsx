@@ -24,10 +24,13 @@ const Assets = () => {
     useEffect(() => {
         const subscription = dataStream.subscribe({
             next: res => {
-                loadedAssets = [
-                    ...loadedAssets.filter(asset => asset.id !== res.id),
-                    { ...res, previewPrice: res.price },
-                ];
+                loadedAssets.length === 0 || !loadedAssets.find(asset => asset.id === res.id)
+                    ? loadedAssets.push({ ...res, previewPrice: res.price })
+                    : (loadedAssets = loadedAssets.map(asset =>
+                          asset.id === res.id
+                              ? { ...asset, price: res.price, previewPrice: asset.price, lastUpdate: res.lastUpdate }
+                              : asset
+                      ));
 
                 if (Date.now() - lastTimeFired >= 1000) {
                     setAssets(loadedAssets);

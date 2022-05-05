@@ -40,7 +40,7 @@ const getAllAssets = (n: number) => {
     return result;
 };
 
-const NUMBER_OF_ASSETS = 20;
+const NUMBER_OF_ASSETS = 10;
 const INTERVAL = 1000;
 
 const assets = getAllAssets(NUMBER_OF_ASSETS);
