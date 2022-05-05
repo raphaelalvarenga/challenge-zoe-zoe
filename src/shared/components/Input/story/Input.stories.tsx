@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { useState } from "react";
 import Input from "..";
 import GlobalStyles from "../../GlobalStyles";
 
@@ -7,15 +8,17 @@ export default {
     component: Input,
 } as ComponentMeta<typeof Input>;
 
-const Template: ComponentStory<typeof Input> = args => (
-    <GlobalStyles>
-        <Input {...args} />
-    </GlobalStyles>
-);
+const Template: ComponentStory<typeof Input> = args => {
+    return (
+        <GlobalStyles>
+            <Input {...args} />
+        </GlobalStyles>
+    );
+};
 
-export const PrimaryInput = Template.bind({});
+export const Primary = Template.bind({});
 
-PrimaryInput.args = {
+Primary.args = {
     inputValue: "",
     setInputValue: () => {},
 };
