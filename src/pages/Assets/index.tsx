@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import dataStream from "../../data";
 import { IAssetUpdated } from "../../shared/interfaces/AssetUpdated.interface";
 import Select, { SingleValue } from "react-select";
+import store from "../../shared/classes/Store.class";
 
 let loadedAssets: IAssetUpdated[] = [];
 
@@ -20,9 +21,7 @@ const Assets = () => {
     const [lastTimeFired, setLastTimeFired] = useState<number>(Date.now());
 
     useEffect(() => {
-        localStorage.getItem("@zoe-zoe-financial-market:inputValue")
-            ? setInputValue(localStorage.getItem("@zoe-zoe-financial-market:inputValue")!)
-            : localStorage.setItem("@zoe-zoe-financial-market:inputValue", "");
+        store.initInputValue(setInputValue);
 
         if (!localStorage.getItem("@zoe-zoe-financial-market:selectValue")) {
             localStorage.setItem("@zoe-zoe-financial-market:selectValue", "all");
