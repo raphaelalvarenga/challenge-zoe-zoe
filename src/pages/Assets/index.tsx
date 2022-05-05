@@ -4,9 +4,10 @@ import Card from "../../shared/components/Card";
 import { useEffect, useState } from "react";
 import dataStream from "../../data";
 import { IAssetUpdated } from "../../shared/interfaces/AssetUpdated.interface";
-import Select, { SingleValue } from "react-select";
 import store from "../../shared/classes/Store.class";
 import { ISelectValue } from "../../shared/interfaces/SelectValue.interface";
+import Select from "../../shared/components/Select";
+import { SingleValue } from "react-select";
 
 let loadedAssets: IAssetUpdated[] = [];
 
@@ -58,25 +59,11 @@ const Assets = () => {
         return filteredAssets;
     };
 
-    const handleSelect = (newValue: SingleValue<{ value: string; label: string }>) => {
-        store.setSelectValue(newValue);
-        setSelectValue(newValue);
-    };
-
     return (
         <Container>
             <FiltersContainer>
                 <Input inputValue={inputValue} setInputValue={setInputValue} />
-                <Select
-                    value={selectValue}
-                    name="assetType"
-                    options={[
-                        { value: "all", label: "All" },
-                        { value: "stock", label: "Stock" },
-                        { value: "currency", label: "Currency" },
-                    ]}
-                    onChange={handleSelect}
-                />
+                <Select selectValue={selectValue} setSelectValue={setSelectValue} />
             </FiltersContainer>
 
             <CardsContainer>
