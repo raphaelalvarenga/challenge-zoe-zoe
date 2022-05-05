@@ -9,7 +9,8 @@ interface IArrow {
 }
 
 export const Container = styled.div`
-    max-width: 400px;
+    margin: auto;
+    width: 300px;
     border-radius: 5px;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
     padding: 14px 8px;
