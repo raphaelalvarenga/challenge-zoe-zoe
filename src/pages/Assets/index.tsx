@@ -20,6 +20,14 @@ const Assets = () => {
     const [lastTimeFired, setLastTimeFired] = useState<number>(Date.now());
 
     useEffect(() => {
+        localStorage.getItem("@zoe-zoe-financial-market:inputValue")
+            ? setInputValue(localStorage.getItem("@zoe-zoe-financial-market:inputValue")!)
+            : localStorage.setItem("@zoe-zoe-financial-market:inputValue", "");
+
+        if (!localStorage.getItem("@zoe-zoe-financial-market:selectValue")) {
+            localStorage.setItem("@zoe-zoe-financial-market:selectValue", "all");
+        }
+
         const subscription = dataStream.subscribe({
             next: res => {
                 loadedAssets.length === 0 || !loadedAssets.find(asset => asset.id === res.id)
