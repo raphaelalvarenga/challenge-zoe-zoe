@@ -1,3 +1,40 @@
+# This project is a result of a challenge proposed and its rules can be found in the steps below, after the installation guide.
+
+## How to prepare the application
+
+1. Make sure you have [Node.js](https://nodejs.org/en/) installed in your machine;
+2. Go to your favorite directory;
+3. Clone this repository with [GIT](https://git-scm.com/) or as a zip;
+4. Go into the project:
+
+> cd challenge-zoe-zoe
+
+5. Install the app's dependencies:
+
+> yarn
+
+or
+
+> npm install
+
+6. Be sure that any change you make in the app and commit it, there is a Git Hook that will format the code even if you don't have any formatter in your editor;
+
+7. To see the visual components created, you can run Storybook:
+
+> yarn storybook
+
+or
+
+> npm run storybook
+
+8. Run the application:
+
+> yarn start
+
+or
+
+> npm run start
+
 # Coding exercise - Asset list
 
 ## General guidelines
