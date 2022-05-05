@@ -12,7 +12,7 @@ import { SingleValue } from "react-select";
 let loadedAssets: IAssetUpdated[] = [];
 
 const Assets = () => {
-    const [inputValue, setInputValue] = useState("");
+    const [inputValue, setInputValue] = useState<string>("");
     const [selectValue, setSelectValue] = useState<SingleValue<ISelectValue>>({
         value: "all",
         label: "All",
