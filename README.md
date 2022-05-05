@@ -1,5 +1,9 @@
 # This project is a result of a challenge proposed and its rules can be found in the steps below, after the installation guide.
 
+# External tools that might be useful can be found here. Click on the links to see them
+
+[Figma's design](https://www.figma.com/file/z34V1OeMwsj0WXPXAi1Jqt/Desafio-ZoeZoe)
+
 ## How to prepare the application
 
 1. Make sure you have [Node.js](https://nodejs.org/en/) installed in your machine;
