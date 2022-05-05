@@ -8,6 +8,7 @@ export const FiltersContainer = styled.div`
     margin: 20px 0 40px 0;
     display: grid;
     grid-template-columns: auto auto;
+    justify-content: space-between;
 `;
 
 export const CardsContainer = styled.div`

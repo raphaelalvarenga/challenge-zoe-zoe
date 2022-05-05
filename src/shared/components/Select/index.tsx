@@ -15,16 +15,18 @@ const Select: FC<ISelect> = ({ selectValue, setSelectValue }) => {
     };
 
     return (
-        <ReactSelect
-            value={selectValue}
-            name="assetType"
-            options={[
-                { value: "all", label: "All" },
-                { value: "stock", label: "Stock" },
-                { value: "currency", label: "Currency" },
-            ]}
-            onChange={handleSelect}
-        />
+        <div style={{ width: "180px" }}>
+            <ReactSelect
+                value={selectValue}
+                name="assetType"
+                options={[
+                    { value: "all", label: "All" },
+                    { value: "stock", label: "Stock" },
+                    { value: "currency", label: "Currency" },
+                ]}
+                onChange={handleSelect}
+            />
+        </div>
     );
 };
 
