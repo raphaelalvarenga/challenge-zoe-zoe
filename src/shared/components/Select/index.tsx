@@ -2,6 +2,7 @@ import { Dispatch, FC, SetStateAction } from "react";
 import ReactSelect, { SingleValue } from "react-select";
 import { ISelectValue } from "../../interfaces/SelectValue.interface";
 import store from "../../classes/Store.class";
+import { SelectContainer } from "./style";
 
 interface ISelect {
     selectValue: SingleValue<ISelectValue>;
@@ -15,7 +16,7 @@ const Select: FC<ISelect> = ({ selectValue, setSelectValue }) => {
     };
 
     return (
-        <div style={{ width: "180px" }}>
+        <SelectContainer data-testid="select-container">
             <ReactSelect
                 value={selectValue}
                 name="assetType"
@@ -26,7 +27,7 @@ const Select: FC<ISelect> = ({ selectValue, setSelectValue }) => {
                 ]}
                 onChange={handleSelect}
             />
-        </div>
+        </SelectContainer>
     );
 };
 
