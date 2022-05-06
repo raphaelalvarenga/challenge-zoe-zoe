@@ -8,7 +8,7 @@ interface ICards {
 }
 
 const Cards: FC<ICards> = ({ filterAssets }) => (
-    <CardsContainer>
+    <CardsContainer data-testid="cards-container">
         {filterAssets().map(asset => (
             <Card key={asset.id} asset={asset} />
         ))}
