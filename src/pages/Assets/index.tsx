@@ -1,6 +1,5 @@
-import { Container, FiltersContainer, CardsContainer } from "./style";
+import { Container, FiltersContainer } from "./style";
 import Input from "../../shared/components/Input";
-import Card from "../../shared/components/Card";
 import { useEffect, useState } from "react";
 import dataStream from "../../data";
 import { IAssetUpdated } from "../../shared/interfaces/AssetUpdated.interface";
@@ -8,6 +7,7 @@ import store from "../../shared/classes/Store.class";
 import { ISelectValue } from "../../shared/interfaces/SelectValue.interface";
 import Select from "../../shared/components/Select";
 import { SingleValue } from "react-select";
+import Cards from "../../shared/components/Cards";
 
 let loadedAssets: IAssetUpdated[] = [];
 
@@ -66,11 +66,7 @@ const Assets = () => {
                 <Select selectValue={selectValue} setSelectValue={setSelectValue} />
             </FiltersContainer>
 
-            <CardsContainer>
-                {filterAssets().map(asset => (
-                    <Card key={asset.id} asset={asset} />
-                ))}
-            </CardsContainer>
+            <Cards filterAssets={filterAssets} />
         </Container>
     );
 };
