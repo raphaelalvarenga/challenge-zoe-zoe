@@ -27,10 +27,14 @@ export const AssetBody = styled.div`
     align-items: center;
 `;
 
-export const AssetType = styled.div`
+export const AssetInfo = styled.div`
     color: ${({ theme }) => theme.darkGrey};
     font-size: 12px;
 `;
+
+export const AssetType = styled.div``;
+
+export const AssetMarket = styled.div``;
 
 export const AssetPrice = styled.div<IAssetPrice>`
     color: ${({ theme, status }) => (status === "bull" ? theme.blue : theme.red)};

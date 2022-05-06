@@ -1,4 +1,15 @@
-import { Container, AssetHeader, AssetBody, AssetType, AssetPrice, AssetArrows, ArrowUp, ArrowDown } from "./style";
+import {
+    Container,
+    AssetHeader,
+    AssetBody,
+    AssetInfo,
+    AssetPrice,
+    AssetArrows,
+    ArrowUp,
+    ArrowDown,
+    AssetType,
+    AssetMarket,
+} from "./style";
 import { ImArrowUp, ImArrowDown } from "react-icons/im";
 import { FC } from "react";
 import { IAssetUpdated } from "../../interfaces/AssetUpdated.interface";
@@ -9,15 +20,15 @@ interface ICard {
 
 const Card: FC<ICard> = ({ asset }) => {
     return (
-        <Container>
-            <AssetHeader>{asset.assetName}</AssetHeader>
+        <Container data-testid="card-container">
+            <AssetHeader data-testid="asset-header">{asset.assetName}</AssetHeader>
             <AssetBody>
-                <AssetType>
-                    <div>{asset.type}</div>
-                    {asset.market && <div>{asset.market}</div>}
-                </AssetType>
+                <AssetInfo>
+                    <AssetType data-testid="asset-type">{asset.type}</AssetType>
+                    {asset.market && <AssetMarket data-testid="asset-market">{asset.market}</AssetMarket>}
+                </AssetInfo>
 
-                <AssetPrice status={asset.price > asset.previewPrice ? "bull" : "bear"}>
+                <AssetPrice status={asset.price > asset.previewPrice ? "bull" : "bear"} data-testid="asset-price">
                     {asset.price.toFixed(4)}
                 </AssetPrice>
 
